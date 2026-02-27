@@ -50,6 +50,7 @@ include "inc/function.php";
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="assets/template/assets/css/demo.css" />
+    <script src="transaction.js"></script>
 </head>
 
 <body>
@@ -704,6 +705,8 @@ include "inc/function.php";
                             } else {
                                 include 'pages/dashboard.php';
                             }
+
+                            include "inc/modal-transaction.php";
                             ?>
                         </div>
                     </div>

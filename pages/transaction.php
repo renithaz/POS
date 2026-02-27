@@ -67,12 +67,12 @@ $rowPros = mysqli_fetch_all($selectProducts, MYSQLI_ASSOC);
                             if ($rowP['category_id'] == $value['id']) {
                         ?>
                                 <div class="col-md-4">
-                                    <div class="card product-card" ondblclick="addToChart({
-                                    id: <?php $rowP['id'] ?>,
-                                    name: <?= $rowP['product_name'] ?>,
-                                    price: <?= $rowP['product_price'] ?>,
-                                    image: <?php 'assets/img/' . $rowP['product_photo'] ?>
-                                    })">
+                                    <div class="card product-card" ondblclick='addToChart({
+                                    id: <?= $rowP["id"] ?>,
+                                    name: <?= $rowP["product_name"] ?>,
+                                    price: <?= $rowP["product_price"] ?>,
+                                    image: "assets/img/<?= $rowP["product_photo"] ?>"
+                                    })'>
                                         <div class="d-flex align-items-center p-3">
                                             <img src="assets/img/<?php echo $rowP['product_photo'] ?>" class="rounded-circle me-3" width="48">
                                             <div>
@@ -93,12 +93,11 @@ $rowPros = mysqli_fetch_all($selectProducts, MYSQLI_ASSOC);
                             if ($key == 0) {
                             ?>
                                 <div class="col-md-4">
-                                    <div class="card product-card" ondblclick="addToChart({
-                                    id: <?php $rowP['id'] ?>,
-                                    name: <?= $rowP['product_name'] ?>,
-                                    price: <?= $rowP['product_price'] ?>,
-                                    image: <?php 'assets/img/' . $rowP['product_photo'] ?>
-                                    })">
+                                    <div class="card product-card" ondblclick='addToChart({
+                                    id: <?= $rowP["id"] ?>,
+                                    name: "<?= $rowP["product_name"] ?>",
+                                    price: <?= $rowP["product_price"] ?>,
+                                    image: "assets/img/<?= $rowP["product_photo"] ?>"})'>
                                         <div class=" d-flex align-items-center p-3">
                                             <img src="assets/img/<?php echo $rowP['product_photo'] ?>" class="rounded-circle me-3" width="48">
                                             <div>
@@ -158,32 +157,31 @@ $rowPros = mysqli_fetch_all($selectProducts, MYSQLI_ASSOC);
 
             <!-- Order Item Dummy -->
             <div id="order-items"></div>
-            <div id="order-item-template">
+            <template id="order-item-template">
                 <div class="card p-2 mb-2 order-item">
-                    <div id="order-items"></div>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center gap-3">
                             <img class="rounded-circle product-img"
                                 src="" width="48" height="48" alt="">
                             <div>
-                                <div class="fw-semiblod product_name"></div>
+                                <div class="fw-semiblod product-name"></div>
                                 <small class="text-muted product-price"></small>
                             </div>
                         </div>
-                        <button class="btn btn-sm-remove-btn">
-                            <i class="bi bi-x"></i>
+                        <button class="btn btn-sm remove-btn btn-danger">
+                            <i class="bi bi-x">Hapus</i>
                         </button>
                     </div>
                     <div class="d-flex justify-content-between align-items-center my-3">
                         <div class="d-flex align-items-center gap-1">
-                            <button class="btn btn-outline-primary btn-sm-qty-minus">-</button>
+                            <button class="btn btn-outline-primary btn-sm qty-minus">-</button>
                             <span class="fw-semibold qty">1</span>
-                            <button class="btn btn-outline-primary btn-sm-qty-plus">+</button>
+                            <button class="btn btn-outline-primary btn-sm qty-plus">+</button>
                         </div>
                         <div class="fw-bold total-price"></div>
                     </div>
                 </div>
-            </div>
+            </template>
 
 
             <!-- Summary -->
@@ -209,8 +207,12 @@ $rowPros = mysqli_fetch_all($selectProducts, MYSQLI_ASSOC);
             <!-- Button -->
             <div class="mt-3 d-flex gap-2">
                 <button class="btn btn-outline-info w-50">Save</button>
-                <button class="btn btn-success w-50">Payment</button>
+                <button class="btn btn-success w-50" data-bs-toggle="modal" data-bs-target="#exampleModal" id="btn-payment">Payment</button>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+
+</script>
