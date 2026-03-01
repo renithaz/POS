@@ -1,15 +1,22 @@
+<!-- Mengambil semua data dari database users untuk ditampilkan dari yang terbaru (descending) -->
 <?php
 $selectUser = mysqli_query($koneksi, "SELECT * FROM users ORDER BY id DESC");
 $rows = mysqli_fetch_all($selectUser, MYSQLI_ASSOC);
 
+// mengecek apakah ada id yang ingin dihapus
 if(isset($_GET['idDel'])){
     $idDel = $_GET['idDel'];
+    // menghapus data user
     $deleteUser = mysqli_query($koneksi, "DELETE FROM users WHERE id=$idDel");
+    // jika berhasil dihapus maka halaman redirect kembali ke halaman user
+    // supaya halaman refresh
     if($deleteUser){
         header("location:?page=user");
     }
 }
 ?>
+
+<!-- Tabel yang berisi data user -->
 <div class="card table-responsive">
     <div class="card-header">
         <h1>Users</h1>

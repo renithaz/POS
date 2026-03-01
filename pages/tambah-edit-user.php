@@ -1,19 +1,23 @@
 <?php
+// mengecek tombol submit
+// mengambil nilai input name, email, password
 if (isset($_POST['add'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = sha1($_POST['password']);
-
+    // menambahkan data baru ke tabel users
     $insertUser = mysqli_query($koneksi, "INSERT INTO users(name, email, password) VALUES ('$name', '$email', '$password')");
     if ($insertUser) {
         header("location:?page=user");
     }
 }
+// mengecek apakah data yang ingin di edit
 if (isset($_GET['id'])) {
     $idEdit = base64_decode($_GET['id']);
     $selectUser = mysqli_query($koneksi, "SELECT * FROM users WHERE id='$idEdit'");
     $row = mysqli_fetch_assoc($selectUser);
 
+    // mengedit data user
     if(isset($_POST['edit'])){
         $name = $_POST['name'];
         $email = $_POST['email'];
