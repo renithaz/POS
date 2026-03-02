@@ -19,16 +19,20 @@ if(isset($_GET['idDel'])){
 <!-- Tabel yang berisi data user -->
 <div class="card table-responsive">
     <div class="card-header">
-        <h1>Users</h1>
+        <div class="card-title">
+            <h1>Data Pengguna</h1>
+        </div>
     </div>
     <div class="card-body">
-        <a href="?page=tambah-edit-user" class="btn btn-primary my-2">ADD</a>
+        <div align="right">
+            <a href="?page=tambah-edit-user" class="btn btn-primary my-2">Buat Pengguna Baru</a>
+        </div>
         <table class="table table-bordered text-center">
             <tr>
                 <th>No</th>
                 <th>Email</th>
-                <th>Username</th>
-                <th>Action</th>
+                <th>Nama Lengkap</th>
+                <th>Tindakan</th>
             </tr>
             <?php
             $no = 1;
@@ -39,10 +43,10 @@ if(isset($_GET['idDel'])){
                     <td><?php echo $value['email'] ?></td>
                     <td><?php echo $value['name'] ?></td>
                     <td>
-                        <a href="?page=tambah-edit-user&id=<?php echo base64_encode($value['id'])?>" class="btn btn-success btn-sm">Edit</a>
+                        <a href="?page=tambah-edit-user&id=<?php echo base64_encode($value['id'])?>" class="btn btn-success btn-sm">Ubah</a>
                         <form action="?page=user&idDel=<?php echo $value['id'] ?>" method="post" 
                         onclick="return confirm('Yakin ingin dihapus?')" class="d-inline">
-                            <button class="btn btn-danger btn-sm">Delete</button>
+                            <button class="btn btn-danger btn-sm">Hapus</button>
                         </form>
                     </td>
                 </tr>

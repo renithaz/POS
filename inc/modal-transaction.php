@@ -10,22 +10,22 @@ $tempOrderCode = 'INV-' . date('Ymd-His');
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Transaksi Penjualan</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="container">
                     <div class="row" style="border: 1px solid blue; padding: 10px">
                         <div class="col-md-4">
-                            <label for="" class="form-label">Order Code</label>
+                            <label for="" class="form-label">Kode Order</label>
                             <input type="text" id="modal-order-code" class="form-control" value="<?= $tempOrderCode ?>" disabled>
                         </div>
                         <div class="col-md-4">
-                            <label for="" class="form-label">Customer Name</label>
-                            <input type="text" class="form-control" required>
+                            <label for="" class="form-label">Nama Pelanggan</label>
+                            <input type="text" class="form-control" required id="customer_name">
                         </div>
                         <div class="col-md-4">
-                            <label for="" class="form-label">Order Date</label>
+                            <label for="" class="form-label">Tanggal Order</label>
                             <input type="text" id="modal-order-date" class="form-control" value="<?= $datetime ?>" disabled>
                         </div>
                     </div>
@@ -35,11 +35,10 @@ $tempOrderCode = 'INV-' . date('Ymd-His');
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Product Name</th>
-                                        <th>QTY</th>
-                                        <th>Order Price</th>
-                                        <th>Order Subtotal</th>
-                                        <th>Counting</th>
+                                        <th>Nama Produk</th>
+                                        <th>Qty</th>
+                                        <th>Harga</th>
+                                        <th>Subtotal</th>
                                     </tr>
                                 </thead>
                                 <tbody id="modal-order-items">
@@ -53,16 +52,18 @@ $tempOrderCode = 'INV-' . date('Ymd-His');
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th colspan="5">Total</th>
+                                        <th colspan="4">Total</th>
                                         <td id="modal-total">Rp. 0</td>
+                                        <input type="hidden" id="total-input">
                                     </tr>
                                     <tr>
-                                        <th colspan="5">Pay</th>
+                                        <th colspan="4">Pay</th>
                                         <td><input type="number" id="pay-amount" class="form-control" value="0" required></td>
                                     </tr>
                                     <tr>
-                                        <th colspan="5">Change</th>
+                                        <th colspan="4">Change</th>
                                         <td id="change-amount">Rp. 0</td>
+                                        <input type="hidden" id="change-input">
                                     </tr>
                                 </tfoot>
                             </table>
@@ -79,6 +80,40 @@ $tempOrderCode = 'INV-' . date('Ymd-His');
 </div>
 
 <script>
+    const btnSave = document.getElementById('btn-save-order');
+    btnSave.addEventListener('click', async function() {
+        let cart = getCart()
+        let payload = {
+            kode: document.getElementById('modal-order-code').value,
+            date: document.getElementById('modal-order-date').value,
+            customer_name: document.getElementById('customer_name').value,
+            amounth: document.getElementById('total-input').value,
+            order_change: document.getElementById('change-input').value,
+            order_pay: document.getElementById('pay-amount').value,
+            cart: cart,
+        }
+
+        try {
+            const res = await fetch("save_transaction.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            //const result = res.text();
+            const result = await res.json();
+            console.log(result);
+            localStorage.removeItem('pos_cart');
+
+        } catch (error) {
+            console.log(error)
+            alert('Terjadi kesalahan saat menyimpan transaksi');
+
+        }
+    });
+
     function calculateCartSummary() {
         const cart = getCart();
         let subtotal = 0;
@@ -111,6 +146,7 @@ $tempOrderCode = 'INV-' . date('Ymd-His');
         const cart = getCart();
         const tbody = document.querySelector("#modal-order-items");
         const totalModal = document.querySelector("#modal-total");
+        const totalInput = document.getElementById('total-input');
 
         tbody.innerHTML = '';
         cart.forEach((item, index) => {
@@ -123,18 +159,19 @@ $tempOrderCode = 'INV-' . date('Ymd-His');
             <td>${item.qty}</td>
             <td>${formatRupiah(item.price)}</td>
             <td>${formatRupiah(subtotal)}</td>
-            <td></td>
             </tr>
             `;
         });
         const summary = calculateCartSummary();
         totalModal.textContent = formatRupiah(summary.total);
+        totalInput.value = pay - summary.total;
     }
-    document.querySelector("#pay-amount").addEventListener('input', function(){
+    document.querySelector("#pay-amount").addEventListener('input', function() {
         const pay = parseInt(this.value) || 0;
         const summary = calculateCartSummary();
         const change = pay - summary.total;
 
         document.querySelector('#change-amount').textContent = change >= 0 ? formatRupiah(change) : 'Rp 0';
+        document.getElementById('change-input').value = change;
     });
 </script>

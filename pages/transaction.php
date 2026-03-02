@@ -52,12 +52,6 @@ $rowPros = mysqli_fetch_all($selectProducts, MYSQLI_ASSOC);
                         <div class="flex-grow-1 mx-3">
                             <input type="text" class="form-control" placeholder="Search">
                         </div>
-
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-light"><i class="bi bi-grid"></i></button>
-                            <button class="btn btn-light"><i class="bi bi-list"></i></button>
-                            <button class="btn btn-light"><i class="bi bi-funnel"></i></button>
-                        </div>
                     </div>
 
                     <!-- Products -->
@@ -67,7 +61,7 @@ $rowPros = mysqli_fetch_all($selectProducts, MYSQLI_ASSOC);
                             if ($rowP['category_id'] == $value['id']) {
                         ?>
                                 <div class="col-md-4">
-                                    <div class="card product-card" ondblclick='addToChart({
+                                    <div class="card product-card" onclick='addToChart({
                                     id: <?= $rowP["id"] ?>,
                                     name: <?= $rowP["product_name"] ?>,
                                     price: <?= $rowP["product_price"] ?>,
@@ -93,7 +87,7 @@ $rowPros = mysqli_fetch_all($selectProducts, MYSQLI_ASSOC);
                             if ($key == 0) {
                             ?>
                                 <div class="col-md-4">
-                                    <div class="card product-card" ondblclick='addToChart({
+                                    <div class="card product-card" onclick='addToChart({
                                     id: <?= $rowP["id"] ?>,
                                     name: "<?= $rowP["product_name"] ?>",
                                     price: <?= $rowP["product_price"] ?>,
@@ -136,10 +130,10 @@ $rowPros = mysqli_fetch_all($selectProducts, MYSQLI_ASSOC);
 
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <button class="nav-link active">Order Details</button>
+                <button class="nav-link active">Detail Pesanan</button>
             </li>
             <li class="nav-item">
-                <button class="nav-link">Order Saved</button>
+                <button class="nav-link">Simpan Pesanan</button>
             </li>
         </ul>
 
@@ -150,8 +144,8 @@ $rowPros = mysqli_fetch_all($selectProducts, MYSQLI_ASSOC);
             <div class="d-flex align-items-center my-3">
                 <div class="avatar-circle me-3">RK</div>
                 <div>
-                    <small class="text-muted">Customer Name</small>
-                    <div class="fw-semibold">Ravi Kamil</div>
+                    <small class="text-muted">Kasir</small>
+                    <div class="fw-semibold"><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : '' ?></div>
                 </div>
             </div>
 
@@ -191,11 +185,11 @@ $rowPros = mysqli_fetch_all($selectProducts, MYSQLI_ASSOC);
                     <small id="subtotal">Rp 0</small>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <small>Tax</small>
+                    <small>Pajak</small>
                     <small id="tax">Rp 0</small>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <small>Discount</small>
+                    <small>Diskon</small>
                     <small id="discount">Rp 0</small>
                 </div>
                 <div class="d-flex justify-content-between fw-bold">

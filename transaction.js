@@ -11,13 +11,15 @@ function saveCart(cart) {
 function addToChart(product) {
   let cart = getCart();
 
-  const found = cart.find((item) => item.id === product.id);
+  const found = cart.find(item => item.id === product.id);
   if (found) {
     found.qty += 1;
   } else {
+    let qty = 1;
     cart.push({
       ...product,
-      qty: 1,
+      qty: qty,
+      subtotal: product.price * 1,
     });
   }
   saveCart(cart);
