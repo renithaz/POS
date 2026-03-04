@@ -4,13 +4,13 @@ $selectUser = mysqli_query($koneksi, "SELECT * FROM users ORDER BY id DESC");
 $rows = mysqli_fetch_all($selectUser, MYSQLI_ASSOC);
 
 // mengecek apakah ada id yang ingin dihapus
-if(isset($_GET['idDel'])){
+if (isset($_GET['idDel'])) {
     $idDel = $_GET['idDel'];
     // menghapus data user
     $deleteUser = mysqli_query($koneksi, "DELETE FROM users WHERE id=$idDel");
     // jika berhasil dihapus maka halaman redirect kembali ke halaman user
     // supaya halaman refresh
-    if($deleteUser){
+    if ($deleteUser) {
         header("location:?page=user");
     }
 }
@@ -27,32 +27,37 @@ if(isset($_GET['idDel'])){
         <div align="right">
             <a href="?page=tambah-edit-user" class="btn btn-primary my-2">Buat Pengguna Baru</a>
         </div>
-        <table class="table table-bordered text-center">
-            <tr>
-                <th>No</th>
-                <th>Email</th>
-                <th>Nama Lengkap</th>
-                <th>Tindakan</th>
-            </tr>
-            <?php
-            $no = 1;
-            foreach ($rows as $value) {
-            ?>
+        <table class="table table-bordered text-center" id="myTable">
+            <thead>
                 <tr>
-                    <td><?php echo $no++ ?></td>
-                    <td><?php echo $value['email'] ?></td>
-                    <td><?php echo $value['name'] ?></td>
-                    <td>
-                        <a href="?page=tambah-edit-user&id=<?php echo base64_encode($value['id'])?>" class="btn btn-success btn-sm">Ubah</a>
-                        <form action="?page=user&idDel=<?php echo $value['id'] ?>" method="post" 
-                        onclick="return confirm('Yakin ingin dihapus?')" class="d-inline">
-                            <button class="btn btn-danger btn-sm">Hapus</button>
-                        </form>
-                    </td>
+                    <th>No</th>
+                    <th>Email</th>
+                    <th>Nama Lengkap</th>
+                    <th>Tindakan</th>
                 </tr>
-            <?php
-            }
-            ?>
+            </thead>
+            <tbody>
+                <?php
+                $no = 1;
+                foreach ($rows as $value) {
+                ?>
+
+                    <tr>
+                        <td><?php echo $no++ ?></td>
+                        <td><?php echo $value['email'] ?></td>
+                        <td><?php echo $value['name'] ?></td>
+                        <td>
+                            <a href="?page=tambah-edit-user&id=<?php echo base64_encode($value['id']) ?>" class="btn btn-success btn-sm">Ubah</a>
+                            <form action="?page=user&idDel=<?php echo $value['id'] ?>" method="post"
+                                onclick="return confirm('Yakin ingin dihapus?')" class="d-inline">
+                                <button class="btn btn-danger btn-sm">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php
+                }
+                ?>
+            </tbody>
         </table>
     </div>
 </div>

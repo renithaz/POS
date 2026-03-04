@@ -91,21 +91,21 @@ if (isset($_GET['id'])) {
             </div>
             <div class="form-group">
                 <label for="" class="form-label">Nama produk *</label>
-                <input placeholder="Masukkan nama produk" type="text" class="form-control" 
-                value="<?php echo isset($_GET['id']) ? $rowProduct['product_name'] : '' ?>" name="product_name">
+                <input placeholder="Masukkan nama produk" type="text" class="form-control"
+                    value="<?php echo isset($_GET['id']) ? $rowProduct['product_name'] : '' ?>" name="product_name">
             </div>
 
             <div class="form-group">
-            <?php if (isset($_GET['id'])) { ?>
-                <img src="assets/img/<?php echo $rowProduct['product_photo']; ?>" width="100" alt="">
-            <?php
-            }
-            ?>
+                <?php if (isset($_GET['id'])) { ?>
+                    <img src="assets/img/<?php echo $rowProduct['product_photo']; ?>" width="100" alt="">
+                <?php
+                }
+                ?>
             </div>
 
             <div class="form-group">
                 <label for="" class="form-label">Foto *</label>
-                <input type="file" class="form-control" name="product_photo">
+                <input type="file" class="form-control" name="product_photo" <?php echo (!isset($_GET['id'])) ? 'required' : '' ?>>
             </div>
 
             <div class="form-group">

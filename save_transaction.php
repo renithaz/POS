@@ -1,5 +1,5 @@
 <?php
-header("Content-type: application/json");
+header("Content-Type: application/json");
 include 'config/koneksi.php';
 
 $data = json_decode(file_get_contents("php://input"));
@@ -21,8 +21,8 @@ mysqli_begin_transaction($koneksi);
 try {
 
 
-    $insertOrder = mysqli_query($koneksi, "INSERT INTO orders (kode, date, customer_name, amounth, order_change, status) 
-    VALUES ('$kode', '$date', '$customer_name', '$amounth', '$order_change', 1)");
+    $insertOrder = mysqli_query($koneksi, "INSERT INTO orders (kode, date, order_pay, customer_name, amounth, order_change, status) 
+    VALUES ('$kode', '$date', '$order_pay', '$customer_name', '$amounth', '$order_change', 1)");
 
     if (!$insertOrder) {
         throw new Exception("Gagal melakukan insert order");

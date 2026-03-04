@@ -15,83 +15,79 @@ FROM orders WHERE MONTH(date) = MONTH(CURDATE()) AND YEAR(date) = YEAR(CURDATE()
 <h1>renzkyyyy</h1>
 
 <div class="row">
-              <div class="col-sm-6 col-md-4">
-                <div class="card card-stats card-round">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-icon">
-                        <div
-                          class="icon-big text-center icon-primary bubble-shadow-small"
-                        >
-                          <i class="fas fa-users"></i>
-                        </div>
-                      </div>
-                      <div class="col col-stats ms-3 ms-sm-0">
-                        <div class="numbers">
-                          <p class="card-category">Hari ini</p>
-                          <h4 class="card-title">
-                            Rp. : <?= number_format($dataHarian['omzet']) ?>
-                          </h4>
-                          <p class="card-subtitle">
-                            Total Transaksi : <?= number_format($dataHarian['total']) ?>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-4">
-                <div class="card card-stats card-round">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-icon">
-                        <div
-                          class="icon-big text-center icon-info bubble-shadow-small"
-                        >
-                          <i class="fas fa-user-check"></i>
-                        </div>
-                      </div>
-                      <div class="col col-stats ms-3 ms-sm-0">
-                        <div class="numbers">
-                          <p class="card-category">Minggu ini</p>
-                          <h4 class="card-title">
-                            Rp. : <?= number_format($mingguan['omzet']) ?>
-                          </h4>
-                          <p class="card-total">
-                            Total Transaksi : <?= $mingguan['total'] ?>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-4">
-                <div class="card card-stats card-round">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-icon">
-                        <div
-                          class="icon-big text-center icon-success bubble-shadow-small"
-                        >
-                          <i class="fas fa-luggage-cart"></i>
-                        </div>
-                      </div>
-                      <div class="col col-stats ms-3 ms-sm-0">
-                        <div class="numbers">
-                          <p class="card-category">Bulan ini</p>
-                          <h4 class="card-title">
-                            Rp. : <?= number_format($bulanan['omzet']) ?>
-                          </h4>
-                          <p class="card-total">
-                            Total Transaksi : <?= $mingguan['total'] ?>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
+  <div class="col-sm-6 col-md-4">
+    <div class="card card-stats card-round">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col-icon">
+            <div class="icon-big text-center icon-primary bubble-shadow-small">
+              <i class="fas fa-users"></i>
             </div>
+          </div>
+          <div class="col col-stats ms-3 ms-sm-0">
+            <div class="numbers">
+              <p class="card-category">Hari Ini</p>
+              <h4 class="card-title">
+                Rp. <?= number_format($dataHarian['omzet']) ?>
+              </h4>
+              <p class="card-subtile">
+                Total Transaksi : <?= number_format($dataHarian['total']) ?>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="card card-stats card-round">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col-icon">
+            <div
+              class="icon-big text-center icon-info bubble-shadow-small">
+              <i class="fas fa-user-check"></i>
+            </div>
+          </div>
+          <div class="col col-stats ms-3 ms-sm-0">
+            <div class="numbers">
+              <p class="card-category">Minggu ini</p>
+              <h4 class="card-title">
+                Rp. : <?= number_format($mingguan['omzet']) ?>
+              </h4>
+              <p class="card-total">
+                Total Transaksi : <?= $mingguan['total'] ?>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="card card-stats card-round">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col-icon">
+            <div
+              class="icon-big text-center icon-success bubble-shadow-small">
+              <i class="fas fa-luggage-cart"></i>
+            </div>
+          </div>
+          <div class="col col-stats ms-3 ms-sm-0">
+            <div class="numbers">
+              <p class="card-category">Bulan ini</p>
+              <h4 class="card-title">
+                Rp. : <?= number_format($bulanan['omzet']) ?>
+              </h4>
+              <p class="card-total">
+                Total Transaksi : <?= $bulanan['total'] ?>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
