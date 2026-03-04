@@ -20,7 +20,7 @@ if(isset($_GET['idDel'])){
 <div class="card table-responsive">
     <div class="card-header">
         <div class="card-title">
-            <h1>Data Pengguna</h1>
+            <h4>Data Pengguna</h1>
         </div>
     </div>
     <div class="card-body">

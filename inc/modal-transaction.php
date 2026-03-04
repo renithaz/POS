@@ -79,6 +79,7 @@ $tempOrderCode = 'INV-' . date('Ymd-His');
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     const btnSave = document.getElementById('btn-save-order');
     btnSave.addEventListener('click', async function() {
@@ -104,8 +105,39 @@ $tempOrderCode = 'INV-' . date('Ymd-His');
 
             //const result = res.text();
             const result = await res.json();
-            console.log(result);
-            localStorage.removeItem('pos_cart');
+            if(result.status === true){
+                localStorage.removeItem('pos_cart');
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                    });
+                    Toast.fire({
+                    icon: "success",
+                    title: result.message || "Transaksi baru berhasil",
+                    });
+
+                    Swal.fire({
+                        title: "Transaksi berhasil",
+                        text: 'Order Code: ' + result.order_id,
+                        icons: 'success',
+                        showCancelButton: true,
+                        confirmButtonText: "Cetak struk",
+                        cancelButtonText: "Transaksi baru",
+                    }).then((res) => {
+                        if (res.isConfirmed) {
+                            window.open('print-struk.php?kode=' + result.order_id, '_blank');
+                        } else {
+                            location.reload();
+                        }
+                        });
+            }
 
         } catch (error) {
             console.log(error)
@@ -160,11 +192,11 @@ $tempOrderCode = 'INV-' . date('Ymd-His');
             <td>${formatRupiah(item.price)}</td>
             <td>${formatRupiah(subtotal)}</td>
             </tr>
-            `;
+            `; 
         });
         const summary = calculateCartSummary();
         totalModal.textContent = formatRupiah(summary.total);
-        totalInput.value = pay - summary.total;
+        totalInput.value = summary.total;
     }
     document.querySelector("#pay-amount").addEventListener('input', function() {
         const pay = parseInt(this.value) || 0;
